@@ -1,4 +1,10 @@
 class Gpt < ApplicationRecord
+
+    belongs_to :user
+
+
+
+
     require 'openai'
 
     # 初期化時に会話履歴を読み込む
@@ -30,9 +36,9 @@ class Gpt < ApplicationRecord
         # アシスタントの応答を追加
         @messages << { role: "assistant", content: message_content }
         
+        
         # 会話履歴をデータベースに保存
         self.update(messages: @messages.to_json)
-
         return message_content
     end
 end

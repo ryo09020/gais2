@@ -15,12 +15,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_085418) do
   enable_extension "plpgsql"
 
   create_table "gpts", force: :cascade do |t|
+    t.integer "user_id"
     t.text "prompt"
     t.text "system"
     t.text "response"
+    t.text "messages"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "messages"
   end
 
   create_table "users", force: :cascade do |t|

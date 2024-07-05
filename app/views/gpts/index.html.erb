@@ -12,16 +12,17 @@
       <div class='col-md-8 offset-md-1'>
         <table class='table table-hover table-inverse'>
           <tbody>
-            <% @gpts.each do |gpt| %>
-              <tr>
-                <td><button type="button" class="btn btn-secondary">User</button></td>
-                <td><%= gpt.prompt %></td>
-              </tr>
-              <tr>
-                <td><button type="button" class="btn btn-outline-dark">Assistant</button></td>
-                <td><%= gpt.response %></td>
-              </tr>
-            <% end %>
+          <% @gpts.each do |gpt| %>
+            <tr>
+              <td><button type="button" class="btn btn-secondary">User</button></td>
+              <td><%= gpt.prompt %></td>
+            </tr>
+            <tr>
+              <td><button type="button" class="btn btn-outline-dark">Assistant</button></td>
+              <td><%= gpt.response %></td>
+            </tr>
+            <td><%= gpt.messages %></td>
+          <% end %>
             <tr>
               <td>
                 <div class="form-group">
