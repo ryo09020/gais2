@@ -1,0 +1,6 @@
+<h1>ChatGPT</h1>
+
+<div class='container'>
+    <%= render 'layouts/conv_threads', pre_system: @pre_system, conversations: @conversations %>
+    <%= render 'layouts/chat_records', chats: @chats %>
+</div>
