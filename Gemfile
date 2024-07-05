@@ -72,3 +72,5 @@ gem "sassc-rails"
 
 gem 'faraday'
 gem 'ruby-openai'
+
+gem 'devise'
