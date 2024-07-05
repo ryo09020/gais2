@@ -74,3 +74,5 @@ gem 'faraday'
 gem 'ruby-openai'
 
 gem 'devise'
+
+gem 'pg'
