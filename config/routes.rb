@@ -12,11 +12,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   resource :users, only: [:show]
 
+  delete "chats/destroy_all/:id" => "chats#destroy_all"
   resources :chats, only: [:create]
-  delete "chats/destroy_all" => "chats#destroy_all"
 
-  resources :conversations, only: [:create, :delete]
   delete "conversations/destroy_all" => "conversations#destroy_all"
+  resources :conversations, only: [:create, :destroy, :show]
 
 
 end

@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_101320) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer "user_id"
+    t.text "title"
     t.text "talk_history"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,16 +1,24 @@
 class ConversationsController < ApplicationController
     def create
         conversation = Conversation.new(conversation_params)
-        conversation.response = conversation.get_response(conversation.system, conversation.prompt)
         conversation.user_id = current_user.id
         if conversation.save
-        redirect_to conversations_path
+            redirect_to conversation_path(conversation.id)
         end
+    end
+
+    def show
+        @pre_system = current_user.chats.last.system if current_user.chats.last.present?
+        @conversations = Conversation.where(user_id: current_user.id)
+        @new_conversation = Conversation.new
+        @conversation = Conversation.find(params[:id])  
+        @chats = current_user.chats.where(conversation_id: @conversation.id)
+        @chat = Chat.new
     end
 
     def destroy
         Conversation.find(params[:id]).destroy
-        redirect_to conversations_path
+        redirect_to users_path
     end
     
     
@@ -23,6 +31,6 @@ class ConversationsController < ApplicationController
     private
     
     def conversation_params
-        params.require(:conversation).permit(:prompt, :system)
+        params.require(:conversation).permit(:title)
     end
 end

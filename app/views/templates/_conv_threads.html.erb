@@ -1,41 +1,62 @@
-<%= form_with model:conversation do |f| %>
-    <div class='row'>
-      <div class='col-md-3'>
-        <div class="form-group">
-          <h4>System Prompt</h4>
-          <%= f.text_area :system, value: pre_system,class: 'form-control' %>
-          <%= link_to "会話履歴消去", conversations_destroy_all_path, data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'm-3 btn btn-danger'%>
-        </div>
-      </div>
-      <div class='col-md-8 offset-md-1'>
-        <table class='table table-hover table-inverse'>
-          <tbody>
-          <% conversations.each do |conversation| %>
+<%= form_with model:new_conversation do |f| %>
+  <div class='row'>
+    <div class='col-2'>
+      <table class='table table-hover table-inverse'>
+        <tbody>
+          <% conversations.each do |conv| %>
             <tr>
-              <td><button type="button" class="btn btn-secondary">User</button></td>
-              <td><%= conversation.prompt %></td>
+              <td><%= link_to conv.title, conversation_path(conv.id) %></td>
             </tr>
-            <tr>
-              <td><button type="button" class="btn btn-outline-dark">Assistant</button></td>
-              <td><%= conversation.response %></td>
-            </tr>
-            <td><%= conversation.messages %></td>
           <% end %>
+          <%= form_with model:new_conversation do |k| %>
             <tr>
               <td>
-                <div class="form-group">
-                  <button type="button" class="btn btn-secondary">User</button>
-                </div>
-              </td>
-              <td>
-                <%= f.text_area :prompt, class: 'form-control' %>
-                <%= f.submit class: 'btn btn-success' %>
+                <%= k.text_field :title, class: 'form-control' %>
+                <%= k.submit class: 'btn btn-primary' %>
               </td>
             </tr>
-          </tbody>
-        </table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class='col-2'>
+      <div class="form-group">
+        <h4>System Prompt</h4>
+        <%= f.text_area :system, value: pre_system,class: 'form-control' %>
+        <%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'm-3 btn btn-danger'%>
       </div>
     </div>
-  <% end %>
 
-<!-- pre_system,conversations -->
+    <div class='col-7 offset-md-1'>
+      <table class='table table-hover table-inverse'>
+        <tbody>
+        <% chats.each do |chat| %>
+          <tr>
+            <td><button type="button" class="btn btn-secondary">User</button></td>
+            <td><%= chat.prompt %></td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn btn-outline-dark">Assistant</button></td>
+            <td><%= chat.response %></td>
+          </tr>
+        <% end %>
+          <tr>
+            <td>
+              <div class="form-group">
+                <button type="button" class="btn btn-secondary">User</button>
+              </div>
+            </td>
+            <td>
+              <%= f.text_area :prompt, class: 'form-control' %>
+              <%= f.hidden_field :conversation_id, value: conversation.id %>
+              <%= f.submit class: 'btn btn-success' %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<!-- pre_system,conversations,chat -->
