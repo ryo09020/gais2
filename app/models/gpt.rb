@@ -30,6 +30,7 @@ class Gpt < ApplicationRecord
         # アシスタントの応答を追加
         @messages << { role: "assistant", content: message_content }
         
+        
         # 会話履歴をデータベースに保存
         self.update(messages: @messages.to_json)
 
