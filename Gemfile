@@ -74,3 +74,6 @@ gem 'faraday'
 gem 'ruby-openai'
 
 gem 'devise'
+
+gem 'pg'
+gem 'dotenv-rails', groups: [:development, :test]

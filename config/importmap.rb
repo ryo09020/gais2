@@ -7,3 +7,4 @@ pin "bootstrap", to: "https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/boot
 pin "@popperjs/core", to: "https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js", preload: true
 pin "jquery", to: "https://code.jquery.com/jquery-3.6.0.min.js", preload: true
 pin "@rails/ujs", to: "https://cdnjs.cloudflare.com/ajax/libs/rails-ujs/6.1.4/rails-ujs.min.js", preload: true
+
