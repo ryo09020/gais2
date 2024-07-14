@@ -9,9 +9,9 @@ class ConversationsController < ApplicationController
 
     def show
         @pre_system = current_user.chats.last.system if current_user.chats.last.present?
-        @conversations = Conversation.where(user_id: current_user.id)
-        @new_conversation = Conversation.new
         @conversation = Conversation.find(params[:id])  
+        @conversations = Conversation.where(user_id: current_user.id, model_id: @conversation.model_id)
+        @new_conversation = Conversation.new(model_id: @conversation.model_id)
         @chats = current_user.chats.where(conversation_id: @conversation.id)
         @chat = Chat.new
     end
@@ -31,6 +31,6 @@ class ConversationsController < ApplicationController
     private
     
     def conversation_params
-        params.require(:conversation).permit(:title)
+        params.require(:conversation).permit(:title, :model_id)
     end
 end

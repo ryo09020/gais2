@@ -1,4 +1,4 @@
-<%= form_with model:new_conversation do |f| %>
+
   <div class='row'>
     <div class='col-2'>
       <table class='table table-hover table-inverse'>
@@ -21,10 +21,11 @@
     </div>
 
     <div class='col-2'>
+    <%= form_with model:chat do |f| %>
       <div class="form-group">
         <h4>System Prompt</h4>
         <%= f.text_area :system, value: pre_system,class: 'form-control' %>
-        <%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'm-3 btn btn-danger'%>
+        <!%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'm-3 btn btn-danger'%>
       </div>
     </div>
 
