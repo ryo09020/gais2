@@ -1,10 +1,14 @@
 class ChatsController < ApplicationController
     def create
         chat = Chat.new(chat_params)
+        conversation = Conversation.find(chat.conversation_id)
+        chat.response = chat.get_response(chat.system, chat.prompt, conversation.model_id)
         
-        
-        chat.response = chat.get_response(chat.system, chat.prompt)
-        
+        if conversation.chats.empty?
+            conversation.title = chat.prompt
+            conversation.save!
+        end
+
         if chat.save!
             redirect_to conversation_path(chat.conversation_id)
         end

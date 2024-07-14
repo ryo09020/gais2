@@ -1,3 +1,4 @@
+<div class='container-fluid'>
 conversations/show.html.erb
 <%= current_user.id %>
 
@@ -13,7 +14,6 @@ conversations/show.html.erb
 
 
 
-<div class='container'>
     <%= render 'templates/conv_threads', pre_system: @pre_system, conversations: @conversations, conversation:@conversation,new_conversation:@new_conversation, chat:@chat,chats: @chats %>
     
 </div>

@@ -17,7 +17,7 @@
                 <%= form_with model:@new_conversation do |k| %>
                     <tr>
                     <td>
-                        <%= k.text_field :title, class: 'form-control' %>
+                        <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
                         <%= k.hidden_field :model_id, value: 0 %>
                         <%= k.submit class: 'btn btn-primary' %>
                     </td>
@@ -42,7 +42,7 @@
                 <%= form_with model:@new_conversation do |k| %>
                     <tr>
                     <td>
-                        <%= k.text_field :title, class: 'form-control' %>
+                        <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
                         <%= k.hidden_field :model_id, value: 1 %>
                         <%= k.submit class: 'btn btn-primary' %>
                     </td>
@@ -67,7 +67,7 @@
                 <%= form_with model:@new_conversation do |k| %>
                     <tr>
                     <td>
-                        <%= k.text_field :title, class: 'form-control' %>
+                        <%= k.hidden_field :title, value: '新しいスレッド' %>
                         <%= k.hidden_field :model_id, value: 2 %>
                         <%= k.submit class: 'btn btn-primary' %>
                     </td>

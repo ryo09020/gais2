@@ -1,6 +1,6 @@
 
   <div class='row'>
-    <div class='col-2'>
+    <div class='col-2 offset-1'>
       <table class='table table-hover table-inverse'>
         <tbody>
           <% conversations.each do |conv| %>
@@ -11,7 +11,8 @@
           <%= form_with model:new_conversation do |k| %>
             <tr>
               <td>
-                <%= k.text_field :title, class: 'form-control' %>
+                <%= k.hidden_field :title, value: '新しいスレッド' %>
+                <%= k.hidden_field :model_id, value: conversation.model_id %>
                 <%= k.submit class: 'btn btn-primary' %>
               </td>
             </tr>
@@ -29,7 +30,7 @@
       </div>
     </div>
 
-    <div class='col-7 offset-md-1'>
+    <div class='col-6'>
       <table class='table table-hover table-inverse'>
         <tbody>
         <% chats.each do |chat| %>

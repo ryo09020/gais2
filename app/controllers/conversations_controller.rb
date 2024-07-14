@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
         @pre_system = current_user.chats.last.system if current_user.chats.last.present?
         @conversation = Conversation.find(params[:id])  
         @conversations = Conversation.where(user_id: current_user.id, model_id: @conversation.model_id)
-        @new_conversation = Conversation.new(model_id: @conversation.model_id)
+        @new_conversation = Conversation.new
         @chats = current_user.chats.where(conversation_id: @conversation.id)
         @chat = Chat.new
     end
