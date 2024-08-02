@@ -39,8 +39,12 @@ class Chat < ApplicationRecord
 
             response = client.messages(
                 parameters: {
-                model: "claude-3-haiku-20240307", 
-                messages: request_messages
+                    model: "claude-3-haiku-20240307", # claude-3-opus-20240229, claude-3-sonnet-20240229
+                    system: "Respond only in Spanish.",
+                    messages: [
+                    {"role": "user", "content": "Hello, Claude!"}
+                    ],
+                    max_tokens: 1000
                 }
             )
             message_content = response["content"].first["text"]
