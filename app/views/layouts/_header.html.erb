@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>GAIs</span></a>
+      <a class="navbar-brand" href="/users"><span>GAIs</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,17 +26,27 @@
       </div>
     </div>
     <% if user_signed_in? %>
-      <li>
-      <div class="text-primary"><%= current_user.email %></div>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, data: { "turbo-method": :delete } %>
+      <li class="px-3">
+      <div class="text-white px-1"><%= current_user.email %></div>
+      </li>
+      <li class="px-3">
+        <%= link_to destroy_user_session_path, data: { "turbo-method": :delete }, class:"text-white text-decoration-none" do %>
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <div class="small">ログアウト</div>
+        <% end %>
       </li>
     <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
+      <li class="px-3">
+        <%= link_to new_user_registration_path, class:"text-white text-decoration-none" do%>
+          <i class="fa-solid fa-user-plus"></i>
+          <div class="small">新規登録</div>
+        <% end %>
       </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
+      <li class="px-3">
+        <%= link_to new_user_session_path, class:"text-white text-decoration-none" do%>
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <div class="small">ログイン</div>
+        <% end %>
       </li>
     <% end %>
   </nav>

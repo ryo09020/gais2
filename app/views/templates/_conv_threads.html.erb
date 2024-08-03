@@ -5,7 +5,8 @@
         <tbody>
           <% conversations.each do |conv| %>
             <tr>
-              <td><%= link_to conv.title, conversation_path(conv.id) %></td>
+              <td><%= link_to conv.title, conversation_path(conv.id) %>
+                  <%= link_to "消す", conversation_path(conv.id), data: { turbo_method: :delete, turbo_confirm: "会話スレッドが全て削除されます" }, class: 'btn-sm btn btn-outline-danger'%></td>
             </tr>
           <% end %>
           <%= form_with model:new_conversation do |k| %>
@@ -25,7 +26,7 @@
     <%= form_with model:chat do |f| %>
       <div class="form-group">
         <h4>System Prompt</h4>
-        <%= f.text_area :system, value: pre_system,class: 'form-control' %>
+        <%= f.text_area :system, value: pre_system,class: 'form-control', style: 'min-height: 200px; width: 100%;' %>
         <!%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'm-3 btn btn-danger'%>
       </div>
     </div>

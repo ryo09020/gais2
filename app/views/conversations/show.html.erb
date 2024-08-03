@@ -4,11 +4,12 @@ conversations/show.html.erb
 
 
 <% if @conversation.model_id==0%>
-    <h1>ChatGPT</h1>
+    <h1>ChatGPT</h1>Gpt-4o
 <% elsif @conversation.model_id==1%>  
-    <h1>Claude</h1>
+    <h1>Claude</h1>Claude 3.5 Sonnet
+
 <% elsif @conversation.model_id==2%>
-    <h1>Gemini</h1>
+    <h1>Gemini</h1>Gemini1.5 pro
 <% end %>
 
 

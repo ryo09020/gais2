@@ -80,4 +80,3 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 
 gem "anthropic"
-
