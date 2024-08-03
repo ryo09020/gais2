@@ -13,7 +13,7 @@ class Chat < ApplicationRecord
         when 1
         get_anthropic_response(system_prompt, messages)
         else
-        get_gemini_response(prompt, messages)
+        get_gemini_response(system_prompt,prompt, messages)
         end
     
         messages << { role: "assistant", content: message_content }
@@ -51,13 +51,13 @@ class Chat < ApplicationRecord
     
     
 
-    def get_gemini_response(system_prompt, messages)
+    def get_gemini_response(system_prompt, prompt,messages)
         require 'net/http'
         require 'uri'
         require 'json'
 
         # APIエンドポイントとリクエストURL
-        uri = URI.parse("https://generativelanguage.googleapis.com/v1beta3/models/gemini-1.5-pro-001:generateText?key=#{ENV['GEMINI_API_KEY']}")
+        uri = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=#{ENV['GEMINI_API_KEY']}")
         # HTTPリクエストの設定
         request = Net::HTTP::Post.new(uri)
         request["Content-Type"] = "application/json"
@@ -65,10 +65,16 @@ class Chat < ApplicationRecord
         
         
         # リクエストボディの設定
-        request.body = JSON.dump({
-            "prompt" => {
-            "text" => prompt,
+        request.body = JSON.generate({
+            "contents": [
+            {
+                "parts": [
+                {
+                    "text": prompt,
+                }
+                ]
             }
+            ]
         })
 
         # リクエストを送信してレスポンスを取得
@@ -80,11 +86,10 @@ class Chat < ApplicationRecord
         
         puts "Response Code: #{response.code}"
         puts "Response Body: #{response.body}"
-        puts 11111111
+        
         # レスポンスの内容を出力
         response_json = JSON.parse(response.body)
-        output = response_json.dig('candidates', 0, 'output')
-
-        output
+        text_value = response_json["candidates"][0]["content"]["parts"][0]["text"]
+        text_value
     end
 end
