@@ -5,20 +5,22 @@ class Chat < ApplicationRecord
       
     def get_response(system_prompt, prompt, model_id)
         messages = JSON.parse(self.conversation.talk_history || '[]')
-        messages << { role: "user", content: prompt }
-    
-        message_content = case model_id
-        when 0
-        get_openai_response(system_prompt, messages)
-        when 1
-        get_anthropic_response(system_prompt, messages)
+        if model_id == 2
+            messages << { role: "user", content: prompt }
+            message_content = get_gemini_response(system_prompt,prompt, messages)
+
         else
-        get_gemini_response(system_prompt,prompt, messages)
+            messages << { role: "user", content: prompt }
+            message_content = case model_id
+            when 0
+            get_openai_response(system_prompt, messages)
+            else
+            get_anthropic_response(system_prompt, messages)
+            end
+            messages << { role: "assistant", content: message_content }
+            self.conversation.update(talk_history: messages.to_json)
         end
-    
-        messages << { role: "assistant", content: message_content }
-        self.conversation.update(talk_history: messages.to_json)
-    
+
         message_content
     end
     
@@ -57,15 +59,14 @@ class Chat < ApplicationRecord
         require 'json'
 
         # APIエンドポイントとリクエストURL
-        uri = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=#{ENV['GEMINI_API_KEY']}")
+        uri = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=#{ENV['GEMINI_API_KEY']}")
         # HTTPリクエストの設定
         request = Net::HTTP::Post.new(uri)
         request["Content-Type"] = "application/json"
-        request["system_instruction"] = system_prompt
         
         
         # リクエストボディの設定
-        request.body = JSON.generate({
+        request.body = {
             "contents": [
             {
                 "parts": [
@@ -74,8 +75,15 @@ class Chat < ApplicationRecord
                 }
                 ]
             }
-            ]
-        })
+            ],
+            "systemInstruction": {
+                "parts": [
+                {
+                    "text": system_prompt,
+                }
+                ]
+            },
+        }.to_json
 
         # リクエストを送信してレスポンスを取得
         http = Net::HTTP.new(uri.hostname, uri.port)
