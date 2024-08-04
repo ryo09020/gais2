@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  devise_for :users
   root to: "homes#top"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,8 +10,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  delete "gpts/destroy_all" => "gpts#destroy_all"
-  resources :gpts, only: [:index,:create]
+  resource :users, only: [:show]
+
+  delete "chats/destroy_all/:id" => "chats#destroy_all"
+  resources :chats, only: [:create]
+
+  delete "conversations/destroy_all" => "conversations#destroy_all"
+  resources :conversations, only: [:create, :destroy, :show]
 
 
 end
