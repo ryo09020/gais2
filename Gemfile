@@ -80,3 +80,14 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 
 gem "anthropic"
+
+gem "omniauth"
+
+gem 'omniauth-oauth2'
+
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-rails_csrf_protection'
+
+gem 'redcarpet'
+gem 'rouge'

@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Gai
   class Application < Rails::Application
+    config.session_store :cookie_store, key: '_gai_session'
+
+    config.action_controller.default_protect_from_forgery = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
@@ -15,6 +18,7 @@ module Gai
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
+    
 
     # Configuration for the application, engines, and railties goes here.
     #
