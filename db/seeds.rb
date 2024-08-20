@@ -8,4 +8,3 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 # User.create!(email: 'c@c', password: 'aaaaaa', password_confirmation: 'aaaaaa')
-Conversation.create!(user_id: 1, title: 'First Conversation', talk_history: 'This is the first conversation')
