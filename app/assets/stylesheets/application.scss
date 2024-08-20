@@ -5,3 +5,27 @@
     font-size: 7px; /* 希望するサイズに調整 */
   }
   
+/* Rouge syntax highlighting */
+
+/* 共通のスタイル */
+pre, code {
+  background-color: #e8e8e8; /* 背景を灰色にする */
+  padding: 10px; /* パディングを追加 */
+  border-radius: 5px; /* 角を丸くする */
+  font-family: 'Courier New', Courier, monospace; /* フォントを設定 */
+  overflow-x: auto; /* 横スクロールを許可 */
+}
+
+/* コードブロック用のスタイル */
+pre {
+  
+  white-space: pre-wrap; /* 行を折り返す */
+  word-wrap: break-word; /* 単語の折り返しを許可 */
+}
+
+/* インラインコード用のスタイル */
+code {
+  
+  padding: 2px 4px; /* 小さなパディング */
+  border-radius: 3px; /* 角を少し丸くする */
+}
