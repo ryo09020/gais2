@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root to: "homes#top"
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users,skip: :registrations,controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resource :users, only: [:show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
