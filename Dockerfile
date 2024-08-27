@@ -5,8 +5,16 @@ FROM ruby:3.2.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # アプリケーションディレクトリを作成
-RUN mkdir /myapp
 WORKDIR /myapp
+
+# 環境変数を設定
+# ENV RAILS_ENV=production
+# master.key を Docker イメージにコピー
+COPY config/master.key /myapp/config/master.key
+# credentials.yml.enc を Docker イメージにコピー
+COPY config/credentials.yml.enc /myapp/config/credentials.yml.enc
+
+
 
 # GemfileとGemfile.lockをコピーしてbundle installを実行
 COPY Gemfile /myapp/Gemfile
@@ -16,8 +24,15 @@ RUN bundle install
 # アプリケーションコードをコピー
 COPY . /myapp
 
-# ポート3000を公開
+
+# アセットをプリコンパイル
+RUN bundle exec rails assets:precompile
+
+# Railsサーバーの起動時に使用するポート番号を指定
+ENV PORT 8080
+
+# ポート8080を公開
 EXPOSE 8080
 
-# サーバーを起動
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "8080"]
+# サーバーを起動。Cloud Runが提供するPORT環境変数を使用
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "${PORT}"]
