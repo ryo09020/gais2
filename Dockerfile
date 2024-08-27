@@ -10,9 +10,9 @@ WORKDIR /myapp
 # 環境変数を設定
 # ENV RAILS_ENV=production
 # master.key を Docker イメージにコピー
-COPY config/master.key /myapp/config/master.key
+# COPY config/master.key /myapp/config/master.key
 # credentials.yml.enc を Docker イメージにコピー
-COPY config/credentials.yml.enc /myapp/config/credentials.yml.enc
+# COPY config/credentials.yml.enc /myapp/config/credentials.yml.enc
 
 
 
