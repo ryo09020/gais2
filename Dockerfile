@@ -9,10 +9,6 @@ WORKDIR /myapp
 
 # 環境変数を設定
 # ENV RAILS_ENV=production
-# master.key を Docker イメージにコピー
-COPY config/master.key /myapp/config/master.key
-# credentials.yml.enc を Docker イメージにコピー
-COPY config/credentials.yml.enc /myapp/config/credentials.yml.enc
 
 
 
@@ -34,5 +30,5 @@ ENV PORT 8080
 # ポート8080を公開
 EXPOSE 8080
 
-# サーバーを起動。Cloud Runが提供するPORT環境変数を使用
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "${PORT}"]
+# Puma サーバーを起動するためのコマンド
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
