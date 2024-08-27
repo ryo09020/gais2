@@ -8,6 +8,11 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN mkdir /myapp
 WORKDIR /myapp
 
+# 環境変数を設定
+# ENV RAILS_ENV=production
+
+
+
 # GemfileとGemfile.lockをコピーしてbundle installを実行
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
@@ -19,5 +24,5 @@ COPY . /myapp
 # ポート3000を公開
 EXPOSE 8080
 
-# サーバーを起動
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "8080"]
+# Puma サーバーを起動するためのコマンド
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
