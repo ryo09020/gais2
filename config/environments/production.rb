@@ -94,5 +94,10 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+<<<<<<< HEAD
   config.web_console.whitelisted_ips = '172.19.0.1'
+=======
+  config.force_ssl = false
+
+>>>>>>> 3c58d9c (omniauth8080)
 end
