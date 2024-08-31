@@ -24,13 +24,18 @@
         </li>
       <% else %>
         <li class="px-3">
-          <%= link_to new_user_session_path, class:"text-white text-decoration-none" do%>
+          <%= button_to  omniauth_authorize_path(:user, :google_oauth2),  data: { turbo: false }, class: "bg-transparent text-white border-0" do %>
             <i class="fa-solid fa-right-to-bracket"></i>
             <div class="row smaller-text">ログイン</div>
-          <% end %>
+          <%end %>
         </li>
       <% end %>
     </ul>
   </div>
 </nav>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
 </header>
