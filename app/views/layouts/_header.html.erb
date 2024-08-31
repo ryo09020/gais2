@@ -1,18 +1,20 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <li class="px-4">
-      <%= link_to "GAIs", users_path, class:"text-white text-decoration-none"%>
-    </li>
+    <% if user_signed_in? %>
     
-    <ul class="navbar-nav ms-auto d-flex flex-row">
       <li class="px-4">
-        <%= link_to root_path, class:"text-white text-decoration-none" do %>
-          <i class="fa-solid fa-feather-pointed"></i>
-          <div class="row smaller-text">リリースノート</div>
-        <% end %>
+        <%= link_to "GAIs", users_path, class:"text-white text-decoration-none"%>
       </li>
-      <% if user_signed_in? %>
+      
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="px-4">
+          <%= link_to root_path, class:"text-white text-decoration-none" do %>
+            <i class="fa-solid fa-feather-pointed"></i>
+            <div class="row smaller-text">リリースノート</div>
+          <% end %>
+        </li>
+
         <li class="px-3">
           <div class="text-white px-1"><%= current_user.email %></div>
         </li>
@@ -22,15 +24,26 @@
             <div class="row smaller-text">ログアウト</div>
           <% end %>
         </li>
-      <% else %>
+      </ul>
+    <% else %>
+      <li class="px-4">
+        <%= link_to "GAIs", "#", class: "text-white text-decoration-none", onclick: "alert('ログインしてください'); return false;" %>
+      </li>
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="px-4">
+          <%= link_to root_path, class:"text-white text-decoration-none" do %>
+            <i class="fa-solid fa-feather-pointed"></i>
+            <div class="row smaller-text">リリースノート</div>
+          <% end %>
+        </li>
         <li class="px-3">
           <%= button_to  omniauth_authorize_path(:user, :google_oauth2),  data: { turbo: false }, class: "bg-transparent text-white border-0" do %>
             <i class="fa-solid fa-right-to-bracket"></i>
             <div class="row smaller-text">ログイン</div>
           <%end %>
         </li>
-      <% end %>
-    </ul>
+      </ul>
+    <% end %>
   </div>
 </nav>
   <% if flash[:alert] %>
