@@ -5,7 +5,6 @@ FROM ruby:3.2.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # アプリケーションディレクトリを作成
-RUN mkdir /myapp
 WORKDIR /myapp
 
 # 環境変数を設定
@@ -21,7 +20,14 @@ RUN bundle install
 # アプリケーションコードをコピー
 COPY . /myapp
 
-# ポート3000を公開
+
+# アセットをプリコンパイル
+RUN bundle exec rails assets:precompile
+
+# Railsサーバーの起動時に使用するポート番号を指定
+ENV PORT 8080
+
+# ポート8080を公開
 EXPOSE 8080
 
 # Puma サーバーを起動するためのコマンド
