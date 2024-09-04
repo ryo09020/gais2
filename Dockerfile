@@ -5,21 +5,18 @@ FROM ruby:3.2.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # アプリケーションディレクトリを作成
-WORKDIR /myapp
+WORKDIR /gais
 
 # 環境変数を設定
 # ENV RAILS_ENV=production
 
-
-
 # GemfileとGemfile.lockをコピーしてbundle installを実行
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+COPY Gemfile /gais/Gemfile
+COPY Gemfile.lock /gais/Gemfile.lock
 RUN bundle install
 
 # アプリケーションコードをコピー
-COPY . /myapp
-
+COPY . /gais
 
 # アセットをプリコンパイル
 RUN bundle exec rails assets:precompile

@@ -3,18 +3,18 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: myapp
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: myapp_development
+      POSTGRES_USER: gais
+      POSTGRES_PASSWORD: sbpoteto
+      POSTGRES_DB: gais_db_production
 
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
-      - ".:/myapp"
+      - ".:/gais"
     ports:
       - "8080:8080"
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://myapp:password@db:5432/myapp_development
+      DATABASE_URL: postgres://gais:sbpoteto@db:5432/gais_db_production
