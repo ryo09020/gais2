@@ -7,8 +7,6 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 # アプリケーションディレクトリを作成
 WORKDIR /gais
 
-# 環境変数を設定
-# ENV RAILS_ENV=production
 
 # GemfileとGemfile.lockをコピーしてbundle installを実行
 COPY Gemfile /gais/Gemfile
@@ -19,7 +17,7 @@ RUN bundle install
 COPY . /gais
 
 # アセットをプリコンパイル
-RUN bundle exec rails assets:precompile
+RUN bundle exec rails assets:precompile RAILS_ENV=production
 
 # Railsサーバーの起動時に使用するポート番号を指定
 ENV PORT 8080
