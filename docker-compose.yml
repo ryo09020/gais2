@@ -6,6 +6,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      volumes:
+        - "/opt/dockerstorage/gais/db:/var/lib/postgresql/data"  # データベースのボリュームマウント
+
 
   web:
     build: .
@@ -13,6 +16,7 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
       - ".:/gais"
+      - "/opt/dockerstorage/gais/web:/gais/public"  # Webサービス用のアセットや公開ファイルを保存するディレクトリ
     ports:
       - "8080:8080"
     depends_on:
