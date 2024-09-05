@@ -16,8 +16,10 @@ RUN bundle install
 # アプリケーションコードをコピー
 COPY . /gais
 
-# アセットをプリコンパイル
-RUN bundle exec rails assets:precompile RAILS_ENV=production
+# BuildKit を使ってシークレットをマウント
+RUN --mount=type=secret,id=master_key,target=config/master.key,required=true \
+    bundle exec rails assets:precompile RAILS_ENV=production
+
 
 # Railsサーバーの起動時に使用するポート番号を指定
 ENV PORT 8080

@@ -49,7 +49,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -72,6 +72,11 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "gai_production"
 
   config.action_mailer.perform_caching = false
+
+
+  # Disable request forgery protection in 本番 environment.
+  config.action_controller.allow_forgery_protection = false
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

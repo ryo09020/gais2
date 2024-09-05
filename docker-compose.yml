@@ -9,8 +9,8 @@ services:
 
   web:
     build: .
-    # 本番じゃないときはmigrate,seed外す
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rake db:migrate&& bundle exec rake db:seed && bundle exec rails s -b '0.0.0.0'"
+    # 本番じゃないときはmigrate,seed外すbundle exec rake db:migrate&& bundle exec rake db:seed
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
       - ".:/gais"
     ports:
