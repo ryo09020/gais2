@@ -8,8 +8,8 @@
     <div class="mb-4">
       <select class="form-select" id="version-select">
         <option value="1.0" selected>バージョン 1.0</option>
-        <option value="1.1">バージョン 1.1</option>
-        <option value="2.0">バージョン 2.0</option>
+        <option value="1.1">バージョン 1.1(未リリース)</option>
+        <option value="2.0">バージョン 2.0(未リリース)</option>
         <!-- 必要に応じてオプションを追加 -->
       </select>
     </div>
@@ -18,37 +18,60 @@
     <div id="release-notes">
       <div class="release-note" data-version="1.0">
         <p class="lead">
-          ここにバージョン 1.0 のリリースノートが入ります。新しい機能や改善点、修正内容について、分かりやすくまとめています。
+          <li>
+            ChatGPT:Gpt-4o
+          </li>
+          <li>
+            Claude:Claude 3.5 Sonnet
+          </li>
+          <li>
+            Gemini:Gemini1.5 pro
+          </li>
+          Chatgpt,Claudeのみ継続的な会話ができる。<br>
+          画像機能は未対応<br>
         </p>
         <ul class="list-unstyled">
           <li class="mb-3">
-            <strong>新機能:</strong> ユーザーインターフェースの改善により、操作がさらに簡単になりました。
+            <strong>バグtips:</strong> 学内アカウントにもかかわらずログイン時に弾かれる際はコールドスタートの可能性があるため再度ログインを試みてください。
           </li>
           <li class="mb-3">
-            <strong>バグ修正:</strong> ログイン時のバグを修正し、セキュリティが向上しました。
-          </li>
-          <li class="mb-3">
-            <strong>パフォーマンス向上:</strong> サーバーレスポンスが最適化され、読み込み速度が向上しました。
+            <strong>パフォーマンス向上:</strong> 特になし
           </li>
         </ul>
       </div>
       <div class="release-note" data-version="1.1" style="display: none;">
         <p class="lead">
-          ここにバージョン 1.1 のリリースノートが入ります。さらに詳細な改善点や修正内容について説明しています。
+          geminiが継続的に会話できるようにする。予定<br>
         </p>
         <ul class="list-unstyled">
           <li class="mb-3">
-            <strong>新機能:</strong> ダークモードの追加で、夜間の利用が快適になりました。
+            <strong>新機能:</strong> Geminiが継続的に会話できるようになります。
           </li>
           <li class="mb-3">
-            <strong>バグ修正:</strong> プロフィール編集画面のバグを修正しました。
+            <strong>バグ修正:</strong> なし
           </li>
           <li class="mb-3">
-            <strong>パフォーマンス向上:</strong> アプリの起動速度がさらに向上しました。
+            <strong>パフォーマンス向上:</strong> なし
           </li>
         </ul>
       </div>
       <!-- 他のバージョンのリリースノートも同様に追加 -->
+            <div class="release-note" data-version="2.0" style="display: none;">
+        <p class="lead">
+          画像機能を追加予定<br>
+        </p>
+        <ul class="list-unstyled">
+          <li class="mb-3">
+            <strong>新機能:</strong> 
+          </li>
+          <li class="mb-3">
+            <strong>バグ修正:</strong> なし
+          </li>
+          <li class="mb-3">
+            <strong>パフォーマンス向上:</strong> なし
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   
