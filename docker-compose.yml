@@ -24,6 +24,3 @@ services:
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       RAILS_ENV: production
-volumes:
-  db-data:  # ボリュームの定義
-  tmp-data:  # 一時ファイル用のボリュームの定義

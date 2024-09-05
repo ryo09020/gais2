@@ -7,6 +7,7 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 # アプリケーションディレクトリを作成
 WORKDIR /gais
 
+ENV RAILS_ENV production
 
 # GemfileとGemfile.lockをコピーしてbundle installを実行
 COPY Gemfile /gais/Gemfile
