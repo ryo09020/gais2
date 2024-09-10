@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
         chat.response = chat.get_response(chat.system, chat.prompt, conversation.model_id)
         
         if conversation.chats.empty?
-            conversation.title = chat.prompt
+            conversation.title = chat.prompt[0, 10]
             conversation.save!
         end
 

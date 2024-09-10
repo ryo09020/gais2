@@ -19,7 +19,7 @@ COPY . /gais
 
 # BuildKit を使ってシークレットをマウント
 RUN --mount=type=secret,id=master_key,target=config/master.key,required=true \
-    bundle exec rails assets:precompile RAILS_ENV=production
+    bundle exec rails assets:precompile
 
 
 # Railsサーバーの起動時に使用するポート番号を指定
