@@ -1,77 +1,72 @@
-
-<div class='row m-5'>
-    <div class='col-md-3 offset-md-1 border rounded shadow bg-light'>
-        <h1>ChatGPT</h1>
-        <table class='table table-hover table-inverse'>
-            <tbody>
-                <% @conversations.each do |conv| %>
-                    <% if conv.model_id == 0 %>
-                        <tr>
-                        <td><%= link_to conv.title, conversation_path(conv.id) %></td>
-                        </tr>
-                    <% end %>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- ChatGPT Section -->
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="border rounded shadow-sm p-3 bg-light h-100 d-flex flex-column">
+                <h2 class="text-center">ChatGPT</h2>
+                <table class="table table-hover mb-3">
+                    <tbody>
+                        <% @conversations.each do |conv| %>
+                            <% if conv.model_id == 0 %>
+                                <tr>
+                                    <td><%= link_to conv.title, conversation_path(conv.id), class: "text-decoration-none text-dark" %></td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    </tbody>
+                </table>
+                <%= form_with model: @new_conversation, local: true do |k| %>
+                    <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
+                    <%= k.hidden_field :model_id, value: 0 %>
+                    <%= k.submit '作成', class: 'btn btn-primary w-100' %>
                 <% end %>
+            </div>
+        </div>
 
-                <%= form_with model:@new_conversation do |k| %>
-                    <tr>
-                    <td>
-                        <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
-                        <%= k.hidden_field :model_id, value: 0 %>
-                        <%= k.submit class: 'btn btn-primary' %>
-                    </td>
-                    </tr>
+        <!-- Claude Section -->
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="border rounded shadow-sm p-3 bg-light h-100 d-flex flex-column">
+                <h2 class="text-center">Claude</h2>
+                <table class="table table-hover mb-3">
+                    <tbody>
+                        <% @conversations.each do |conv| %>
+                            <% if conv.model_id == 1 %>
+                                <tr>
+                                    <td><%= link_to conv.title, conversation_path(conv.id), class: "text-decoration-none text-dark" %></td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    </tbody>
+                </table>
+                <%= form_with model: @new_conversation, local: true do |k| %>
+                    <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
+                    <%= k.hidden_field :model_id, value: 1 %>
+                    <%= k.submit '作成', class: 'btn btn-primary w-100' %>
                 <% end %>
-            </tbody>
-        </table>
-    </div>
+            </div>
+        </div>
 
-    <div class='col-md-3 border rounded shadow bg-light mx-3'>
-        <h1>Claude</h1>
-        <table class='table table-hover table-inverse'>
-            <tbody>
-                <% @conversations.each do |conv| %>
-                    <% if conv.model_id == 1 %>
-                        <tr>
-                        <td><%= link_to conv.title, conversation_path(conv.id) %></td>
-                        </tr>
-                    <% end %>
+        <!-- Gemini Section -->
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="border rounded shadow-sm p-3 bg-light h-100 d-flex flex-column">
+                <h2 class="text-center">Gemini</h2>
+                <table class="table table-hover mb-3">
+                    <tbody>
+                        <% @conversations.each do |conv| %>
+                            <% if conv.model_id == 2 %>
+                                <tr>
+                                    <td><%= link_to conv.title, conversation_path(conv.id), class: "text-decoration-none text-dark" %></td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    </tbody>
+                </table>
+                <%= form_with model: @new_conversation, local: true do |k| %>
+                    <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
+                    <%= k.hidden_field :model_id, value: 2 %>
+                    <%= k.submit '作成', class: 'btn btn-primary w-100' %>
                 <% end %>
-
-                <%= form_with model:@new_conversation do |k| %>
-                    <tr>
-                    <td>
-                        <%= k.hidden_field :title, value: '新しいスレッドのタイトル' %>
-                        <%= k.hidden_field :model_id, value: 1 %>
-                        <%= k.submit class: 'btn btn-primary' %>
-                    </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-
-    <div class='col-md-3 border rounded shadow bg-light'>
-        <h1>Gemini</h1>
-        <table class='table table-hover table-inverse'>
-            <tbody>
-                <% @conversations.each do |conv| %>
-                    <% if conv.model_id == 2 %>
-                        <tr>
-                        <td><%= link_to conv.title, conversation_path(conv.id) %></td>
-                        </tr>
-                    <% end %>
-                <% end %>
-
-                <%= form_with model:@new_conversation do |k| %>
-                    <tr>
-                    <td>
-                        <%= k.hidden_field :title, value: '新しいスレッド' %>
-                        <%= k.hidden_field :model_id, value: 2 %>
-                        <%= k.submit class: 'btn btn-primary' %>
-                    </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
 </div>

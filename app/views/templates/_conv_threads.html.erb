@@ -1,65 +1,85 @@
 
-  <div class='row'>
-    <div class='col-2 offset-1'>
-      <table class='table table-hover table-inverse'>
-        <tbody>
-          <% conversations.each do |conv| %>
-            <tr>
-              <td><%= link_to conv.title, conversation_path(conv.id) %>
-                  <%= link_to "消す", conversation_path(conv.id), data: { turbo_method: :delete, turbo_confirm: "会話スレッドが全て削除されます" }, class: 'btn-sm btn btn-outline-danger'%></td>
-            </tr>
-          <% end %>
-          <%= form_with model:new_conversation do |k| %>
-            <tr>
-              <td>
-                <%= k.hidden_field :title, value: '新しいスレッド' %>
-                <%= k.hidden_field :model_id, value: conversation.model_id %>
-                <%= k.submit class: 'btn btn-primary' %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+  <div class="row gy-3 m-2">
 
-    <div class='col-2'>
-    <%= form_with model:chat do |f| %>
-      <div class="form-group">
-        <h4>System Prompt</h4>
-        <%= f.text_area :system, value: pre_system,class: 'form-control', style: 'min-height: 200px; width: 100%;' %>
-        <!%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'm-3 btn btn-danger'%>
+    <!-- Conversations List Section -->
+    <div class="col-12 col-md-3 col-lg-3">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Conversations</h5>
+          <table class="table table-hover table-sm">
+            <tbody>
+              <% conversations.each do |conv| %>
+                <tr>
+                  <td>
+                    <%= link_to conv.title, conversation_path(conv.id), class: 'text-decoration-none text-dark' %>
+                    <%= link_to "消す", conversation_path(conv.id), data: { turbo_method: :delete, turbo_confirm: "会話スレッドが全て削除されます" }, class: 'btn btn-outline-danger btn-sm float-end'%>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= form_with model: new_conversation, local: true do |k| %>
+            <div class="d-grid gap-2">
+              <%= k.hidden_field :title, value: '新しいスレッド' %>
+              <%= k.hidden_field :model_id, value: conversation.model_id %>
+              <%= k.submit '作成', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
 
-    <div class='col-6'>
-      <table class='table table-hover table-inverse'>
-        <tbody>
-        <% chats.each do |chat| %>
-          <tr>
-            <td><button type="button" class="btn btn-secondary">User</button></td>
-            <td><%= chat.prompt %></td>
-          </tr>
-          <tr>
-            <td><button type="button" class="btn btn-outline-dark">Assistant</button></td>
-            <td><%= markdown(chat.response) %></td>
-          </tr>
-        <% end %>
-          <tr>
-            <td>
-              <div class="form-group">
-                <button type="button" class="btn btn-secondary">User</button>
-              </div>
-            </td>
-            <td>
-              <%= f.text_area :prompt, class: 'form-control' %>
-              <%= f.hidden_field :conversation_id, value: conversation.id %>
-              <%= f.submit class: 'btn btn-success' %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<!-- Combined System Prompt and Chat History Section -->
+<div class="col-12 col-md-9 col-lg-9">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title mb-3">System Prompt & Chat History</h5>
+      <%= form_with model: chat, local: true do |f| %>
+        <div class="row">
+          <!-- System Prompt Section -->
+          <div class="col-12 col-lg-3 mb-3 col-md-3">
+            <div class="form-group">
+              <h6>System Prompt</h6>
+              <%= f.text_area :system, value: pre_system, class: 'form-control', style: 'min-height: 200px;' %>
+              <!-- Optional link for clearing conversation history -->
+              <!-- <%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'btn btn-danger mt-3'%> -->
+            </div>
+          </div>
+
+          <!-- Chat History Section -->
+          <div class="col-12 col-lg-9 col-md-9">
+            <h6>Chat History</h6>
+            <table class="table table-hover table-sm">
+              <tbody>
+                <% chats.each do |chat| %>
+                  <tr>
+                    <td class="w-25">
+                      <button type="button" class="btn btn-secondary btn-sm">User</button>
+                    </td>
+                    <td><%= chat.prompt %></td>
+                  </tr>
+                  <tr>
+                    <td class="w-25">
+                      <button type="button" class="btn btn-outline-dark btn-sm">Assistant</button>
+                    </td>
+                    <td><%= markdown(chat.response) %></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td>
+                    <button type="button" class="btn btn-secondary btn-sm">User</button>
+                  </td>
+                  <td>
+                    <%= f.text_area :prompt, class: 'form-control', placeholder: 'Enter your message...' %>
+                    <%= f.hidden_field :conversation_id, value: conversation.id %>
+                    <%= f.submit '送信', class: 'btn btn-success mt-2 w-100' %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-<% end %>
-
-<!-- pre_system,conversations,chat -->
+</div>

@@ -1,17 +1,21 @@
 <div class='container-fluid'>
 
-
-<% if @conversation.model_id==0%>
-    <h1>ChatGPT</h1>Gpt-4o
-<% elsif @conversation.model_id==1%>  
-    <h1>Claude</h1>Claude 3.5 Sonnet
-
-<% elsif @conversation.model_id==2%>
-    <h1>Gemini</h1>Gemini1.5 pro
-<% end %>
-
-
-
+    <!-- Content Section -->
+    <div class="model-info">
+        <% if @conversation.model_id == 0 %>
+            <h1>ChatGPT</h1>
+            <p>GPT-4o</p>
+            <i class="fas fa-robot icon"></i>
+        <% elsif @conversation.model_id == 1 %>
+            <h1>Claude</h1>
+            <p>Claude 3.5 Sonnet</p>
+            <i class="fas fa-robot icon"></i>
+        <% elsif @conversation.model_id == 2 %>
+            <h1>Gemini</h1>
+            <p>Gemini 1.5 Pro</p>
+            <i class="fas fa-robot icon"></i>
+        <% end %>
+    </div>
 
     <%= render 'templates/conv_threads', pre_system: @pre_system, conversations: @conversations, conversation:@conversation,new_conversation:@new_conversation, chat:@chat,chats: @chats %>
     
