@@ -2,8 +2,21 @@ class ChatsController < ApplicationController
     def create
         chat = Chat.new(chat_params)
         conversation = Conversation.find(chat.conversation_id)
-        chat.response = chat.get_response(chat.system, chat.prompt, conversation.model_id)
         
+        if current_user.id == 1
+            api_key = chat_params[:api_key]
+        else
+            if conversation.model_id == 0
+                api_key = ENV['OPENAI_API_KEY']
+            elsif conversation.model_id == 1
+                api_key = ENV['CLAUDE_API_KEY']
+            else
+                api_key = ENV['GEMINI_API_KEY']
+            end
+        end
+
+        chat.response = chat.get_response(chat.system, chat.prompt, conversation.model_id, api_key)
+
         if conversation.chats.empty?
             conversation.title = chat.prompt[0, 10]
             conversation.save!
@@ -27,6 +40,6 @@ class ChatsController < ApplicationController
     private
 
     def chat_params
-        params.require(:chat).permit(:prompt, :system, :conversation_id)
+        params.require(:chat).permit(:prompt, :system, :conversation_id, :api_key)
     end
 end

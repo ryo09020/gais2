@@ -1,21 +1,24 @@
 class Chat < ApplicationRecord
     belongs_to :conversation
     validates :prompt, presence: true
+
+    # 一時的な属性としてAPIキーを扱う
+    attr_accessor :api_key
    
       
-    def get_response(system_prompt, prompt, model_id)
+    def get_response(system_prompt, prompt, model_id, api_key)
         messages = JSON.parse(self.conversation.talk_history || '[]')
         if model_id == 2
             messages << { role: "user", content: prompt }
-            message_content = get_gemini_response(system_prompt,prompt, messages)
+            message_content = get_gemini_response(system_prompt,prompt, messages, api_key)
 
         else
             messages << { role: "user", content: prompt }
             message_content = case model_id
             when 0
-            get_openai_response(system_prompt, messages)
+            get_openai_response(system_prompt, messages, api_key)
             else
-            get_anthropic_response(system_prompt, messages)
+            get_anthropic_response(system_prompt, messages, api_key)
             end
             messages << { role: "assistant", content: message_content }
             self.conversation.update(talk_history: messages.to_json)
@@ -26,8 +29,9 @@ class Chat < ApplicationRecord
     
     private
     
-    def get_openai_response(system_prompt, messages)
-        client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+    def get_openai_response(system_prompt, messages, api_key)
+        client = OpenAI::Client.new(access_token: api_key)
+        # client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
         request_messages = messages + [{ role: "system", content: system_prompt }]
         response = client.chat(
         parameters: {
@@ -38,8 +42,9 @@ class Chat < ApplicationRecord
         response.dig("choices", 0, "message", "content")
     end
     
-    def get_anthropic_response(system_prompt, messages)
-        client = Anthropic::Client.new(access_token: ENV['CLAUDE_API_KEY'])
+    def get_anthropic_response(system_prompt, messages, api_key)
+        # client = Anthropic::Client.new(access_token: ENV['CLAUDE_API_KEY'])
+        client = Anthropic::Client.new(access_token: api_key)
         response = client.messages(
         parameters: {
             model: "claude-3-5-sonnet-20240620",
@@ -53,13 +58,15 @@ class Chat < ApplicationRecord
     
     
 
-    def get_gemini_response(system_prompt, prompt,messages)
+    def get_gemini_response(system_prompt, prompt,messages, api_key)
         require 'net/http'
         require 'uri'
         require 'json'
 
         # APIエンドポイントとリクエストURL
-        uri = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=#{ENV['GEMINI_API_KEY']}")
+        # uri = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=#{ENV['GEMINI_API_KEY']}")
+        uri = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=#{api_key}")
+
         # HTTPリクエストの設定
         request = Net::HTTP::Post.new(uri)
         request["Content-Type"] = "application/json"
