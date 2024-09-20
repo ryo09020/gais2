@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
        :recoverable, :rememberable, :validatable,
-       :omniauthable, omniauth_providers: [:google_oauth2]
+       :timeoutable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :conversations, dependent: :destroy
   has_many :chats, through: :conversations  
