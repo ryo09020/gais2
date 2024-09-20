@@ -1,21 +1,30 @@
 <div class='container-fluid'>
 
     <!-- Content Section -->
-    <div class="model-info">
-        <% if @conversation.model_id == 0 %>
-            <h1>ChatGPT</h1>
-            <p>GPT-4o</p>
-            <i class="fas fa-robot icon"></i>
-        <% elsif @conversation.model_id == 1 %>
-            <h1>Claude</h1>
-            <p>Claude 3.5 Sonnet</p>
-            <i class="fas fa-robot icon"></i>
-        <% elsif @conversation.model_id == 2 %>
-            <h1>Gemini</h1>
-            <p>Gemini 1.5 Pro</p>
-            <i class="fas fa-robot icon"></i>
-        <% end %>
+<div class="model-info d-flex justify-content-between" style="gap: 20px;">
+  <% if @conversation.model_id == 0 %>
+    <div class="model-card text-center" style="background-color: #c8e6c9; padding: 20px; border-radius: 15px; flex: 1;">
+      <h1 class="mb-3" style="font-size: 2rem; color: #388E3C;">ChatGPT</h1>
+      <p class="mb-3" style="font-size: 1.2rem;">GPT-4o</p>
+      <i class="fas fa-robot" style="font-size: 3rem; color: #388E3C;"></i>
     </div>
+  <% elsif @conversation.model_id == 1 %>
+    <div class="model-card text-center" style="background-color: #f9e6d5; padding: 20px; border-radius: 15px; flex: 1;">
+      <h1 class="mb-3" style="font-size: 2rem; color: #D27D5D;">Claude</h1>
+      <p class="mb-3" style="font-size: 1.2rem;">Claude 3.5 Sonnet</p>
+      <i class="fa-solid fa-paper-plane" style="font-size: 3rem; color: #D27D5D;"></i>
+    </div>
+  <% elsif @conversation.model_id == 2 %>
+    <div class="model-card text-center" style="background-color: #bbdefb; padding: 20px; border-radius: 15px; flex: 1;">
+      <h1 class="mb-3" style="font-size: 2rem; color: #1976D2;">Gemini</h1>
+      <p class="mb-3" style="font-size: 1.2rem;">Gemini 1.5 Pro</p>
+      <i class="fas fa-star" style="font-size: 3rem; color: #1976D2;"></i>
+    </div>
+  <% end %>
+</div>
+
+
+
 
     <%= render 'templates/conv_threads', pre_system: @pre_system, conversations: @conversations, conversation:@conversation,new_conversation:@new_conversation, chat:@chat,chats: @chats %>
     
