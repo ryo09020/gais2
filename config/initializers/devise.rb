@@ -18,7 +18,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {
     scope: 'userinfo.email,userinfo.profile',
     prompt: 'select_account',
-    redirect_uri: 'http://localhost:8080/users/auth/google_oauth2/callback'
+    redirect_uri: 'http://gais.sb.ecei.tohoku.ac.jp/users/auth/google_oauth2/callback'
   }
   #↑この記述をconfig/omniauth.rbにも記述していたため、エラーが発生していた。！！！！
 
