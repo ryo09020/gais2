@@ -3,7 +3,7 @@ class ChatsController < ApplicationController
         chat = Chat.new(chat_params)
         conversation = Conversation.find(chat.conversation_id)
         
-        if current_user.id == 1
+        if (6..35).include?(current_user.id)
             api_key = chat_params[:api_key]
         else
             if conversation.model_id == 0
