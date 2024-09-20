@@ -6,41 +6,25 @@
   font-size: 7px; /* 希望するサイズに調整 */
 }
 
-/* Rouge syntax highlighting */
-pre, code {
-  background-color: #e8e8e8; /* 背景を灰色にする */
-  padding: 10px; /* パディングを追加 */
-  border-radius: 5px; /* 角を丸くする */
-  font-family: 'Courier New', Courier, monospace; /* フォントを設定 */
-  overflow-x: auto; /* 横スクロールを許可 */
+.custom-login-btn {
+  background-color: #007bff; /* ブルー系の背景色 */
+  color: white; /* テキストカラーを白に */
+  border-radius: 30px; /* 丸みのあるボタンにする */
+  border: none; /* デフォルトのボーダーを消す */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* さりげないシャドウで浮き上がる感 */
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* ホバー時のアニメーション */
 }
 
-.model-info {
-  text-align: center;
-  padding: 30px;
-  border-radius: 8px;
-  background-color: #f8f9fa; /* Light background color */
-  border: 2px solid #dee2e6; /* Subtle border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.custom-login-btn:hover {
+  background-color: #0056b3; /* ホバー時に少し濃くする */
+  transform: translateY(-3px); /* ホバー時に少し浮くアニメーション */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* シャドウを強調 */
 }
 
-.model-info h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  color: #343a40; /* Dark text color */
-  font-family: 'Helvetica Neue', sans-serif;
-  font-weight: 600;
+.custom-login-btn i {
+  font-size: 1.2em; /* アイコンを少し大きくして目立たせる */
 }
 
-.model-info p {
-  font-size: 1.25rem;
-  margin: 0;
-  color: #6c757d; /* Light text color */
-  font-family: 'Arial', sans-serif;
-}
-
-.model-info .icon {
-  font-size: 3rem;
-  color: #007bff; /* Accent color */
-  margin-top: 15px;
+.smaller-text {
+  font-size: 0.9em; /* テキストを少し小さめにしてバランスを取る */
 }

@@ -37,10 +37,10 @@
       <%= form_with model: chat, local: true do |f| %>
         <div class="row">
           <!-- System Prompt Section -->
-          <div class="col-12 col-lg-3 mb-3 col-md-3">
+          <div class="col-12 col-lg-12 mb-3 col-md-12">
             <div class="form-group">
               <h6>System Prompt</h6>
-              <%= f.text_area :system, value: pre_system, class: 'form-control', style: 'min-height: 200px;' %>
+              <%= f.text_area :system, value: pre_system, class: 'form-control', style: 'min-height: 100px;' %>
               <!-- Optional link for clearing conversation history -->
               <!-- <%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'btn btn-danger mt-3'%> -->
             </div>
@@ -53,19 +53,19 @@
           </div>
 
           <!-- Chat History Section -->
-          <div class="col-12 col-lg-9 col-md-9">
+          <div class="col-12 col-lg-12 col-md-12">
             <h6>Chat History</h6>
             <table class="table table-hover table-sm">
               <tbody>
                 <% chats.each do |chat| %>
                   <tr>
-                    <td class="w-25">
+                    <td class="col-1">
                       <button type="button" class="btn btn-secondary btn-sm">User</button>
                     </td>
-                    <td><%= chat.prompt %></td>
+                    <td class="col-11"><%= chat.prompt %></td>
                   </tr>
                   <tr>
-                    <td class="w-25">
+                    <td class="w-25 col-11">
                       <button type="button" class="btn btn-outline-dark btn-sm">Assistant</button>
                     </td>
                     <td><%= markdown(chat.response) %></td>

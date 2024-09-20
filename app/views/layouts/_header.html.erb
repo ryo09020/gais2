@@ -1,51 +1,60 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <% if user_signed_in? %>
     
-      <li class="px-4">
-        <%= link_to "GAIs", users_path, class:"text-white text-decoration-none"%>
-      </li>
       
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li class="px-4">
-          <%= link_to root_path, class:"text-white text-decoration-none" do %>
-            <i class="fa-solid fa-feather-pointed"></i>
-            <div class="row smaller-text">リリースノート</div>
-          <% end %>
-        </li>
+      <!-- ロゴやブランドのリンク -->
+      <a class="navbar-brand px-4" href="<%= root_path %>">
+        <i class="fa-regular fa-chess-knight"></i> GAIS
+      </a>
+      
+      <!-- トグルボタン（ハンバーガーメニュー） -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- 折りたたまれるナビゲーションメニュー -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <% if user_signed_in? %> 
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item px-3">
+              <span class="nav-link text-white"><%= current_user.email %></span>
+            </li>
+            
+            <li class="nav-item px-4">
+              <%= link_to users_path, class: "nav-link text-white align-items-center" do %>
+                <i class="fa-solid fa-house"></i>
+                <span class="small">ホーム</span>
+              <% end %>
+            </li>
 
-        <li class="px-3">
-          <div class="text-white px-1"><%= current_user.email %></div>
-        </li>
-        <li class="px-3">
-          <%= link_to destroy_user_session_path, data: { "turbo-method": :delete }, class:"text-white text-decoration-none" do %>
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <div class="row smaller-text">ログアウト</div>
-          <% end %>
-        </li>
-      </ul>
-    <% else %>
-      <li class="px-4">
-        <%= link_to "GAIs", "#", class: "text-white text-decoration-none", onclick: "alert('ログインしてください'); return false;" %>
-      </li>
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li class="px-4">
-          <%= link_to root_path, class:"text-white text-decoration-none" do %>
-            <i class="fa-solid fa-feather-pointed"></i>
-            <div class="row smaller-text">リリースノート</div>
-          <% end %>
-        </li>
-        <li class="px-3">
-          <%= button_to  omniauth_authorize_path(:user, :google_oauth2),  data: { turbo: false }, class: "bg-transparent text-white border-0" do %>
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <div class="row smaller-text">ログイン</div>
-          <%end %>
-        </li>
-      </ul>
-    <% end %>
-  </div>
-</nav>
+            <li class="nav-item px-4">
+              <%= link_to about_path, class: "nav-link text-white align-items-center" do %>
+                <i class="fa-solid fa-feather-pointed"></i> 
+                <span class="small">リリースノート</span>
+              <% end %>
+            </li>
+
+            <li class="nav-item px-3">
+              <%= link_to destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-link text-white align-items-center" do %>
+                <i class="fa-solid fa-right-from-bracket"></i> 
+                <span class="small">ログアウト</span>
+              <% end %>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item px-4">
+              <%= link_to about_path, class: "nav-link text-white align-items-center" do %>
+                <i class="fa-solid fa-feather-pointed me-2"></i> 
+                <span class="small">リリースノート</span>
+              <% end %>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
   <% if flash[:alert] %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <%= flash[:alert] %>

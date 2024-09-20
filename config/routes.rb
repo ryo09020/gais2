@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root to: "homes#top"
+  get "/about", to: "homes#about"
+
   devise_for :users,skip: :registrations,controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resource :users, only: [:show]
 

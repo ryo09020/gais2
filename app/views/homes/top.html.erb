@@ -1,94 +1,56 @@
-<div class="row mt-5">
-  <div class="col-2"></div>
-  
-  <div class="col-8 p-4 border rounded shadow bg-light">
-    <h2 class="text-center mb-4"><i class="fa-solid fa-feather-pointed"></i> リリースノート</h2>
 
-    <!-- バージョン選択 -->
-    <div class="mb-4">
-      <select class="form-select" id="version-select">
-        <option value="1.0" selected>バージョン 1.0</option>
-        <option value="1.1">バージョン 1.1(未リリース)</option>
-        <option value="2.0">バージョン 2.0(未リリース)</option>
-        <!-- 必要に応じてオプションを追加 -->
-      </select>
+<div class="row justify-content-center mt-3">
+  <div class="col-md-10 col-lg-8">
+    <!-- アプリ概要と注意事項 -->
+    <div class="p-5 border rounded shadow bg-light">
+      <!-- GAISタイトル -->
+      <h1 class="text-center mb-4"><i class="fa-regular fa-chess-knight m-2"></i>GAIS</h1>
+      <p class="lead text-center">
+        GAISは、ChatGPT、Claude、Geminiの最新の生成AIモデルを活用できるプラットフォームです。利用者の皆様が最先端のAIを最大限に活用できるようサポートします。
+      </p>
+
+      <!-- 重要なご案内 -->
+      <h3 class="text-center mt-5 mb-3"><i class="fa-solid fa-exclamation-circle m-2"></i>重要なご案内</h3>
+      <p class="text-center">
+        本アプリは、現在限定的な資金で運営されています。東北大学のメールアドレスを使用して利用する場合、費用はGoogle exploreCSR 2022/2023の予算から賄われます。この予算が終了すると、サービスが予告なく終了する可能性があります。ただし、サービスが終了した場合でも、過去のチャットログは引き続き閲覧可能です。
+      </p>
+      <!-- ログインボタン -->
+      <% unless user_signed_in? %>
+        <div class="d-flex justify-content-center align-items-center pt-3">
+          <%= button_to omniauth_authorize_path(:user, :google_oauth2), data: { turbo: false }, class: "custom-login-btn nav-link d-flex align-items-center justify-content-center p-3" do %>
+            <i class="fa-solid fa-right-to-bracket me-2"></i> 
+            <span class="d-none d-lg-inline smaller-text">ログイン</span>
+            <span class="d-lg-none">ログイン</span>
+          <% end %>
+        </div>
+      <% end %>
+      <!-- CSSでカスタマイズ -->
+    <style>
+      .custom-login-btn {
+        background-color: #007bff; /* 背景色 */
+        color: white; /* テキストカラー */
+        border-radius: 30px; /* 丸み */
+        border: none; /* ボーダーを削除 */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* シャドウ */
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* ホバー時のアニメーション */
+      }
+
+      .custom-login-btn:hover {
+        background-color: #0056b3; /* ホバー時の色 */
+        transform: translateY(-3px); /* 浮き上がるアニメーション */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* シャドウ強調 */
+      }
+
+      .custom-login-btn i {
+        font-size: 1.2em; /* アイコンサイズ */
+      }
+
+      .smaller-text {
+        font-size: 0.9em; /* テキストサイズ */
+      }
+    </style>
     </div>
-    
-    <!-- 各バージョンのリリースノート -->
-    <div id="release-notes">
-      <div class="release-note" data-version="1.0">
-        <p class="lead">
-          <li>
-            ChatGPT:Gpt-4o
-          </li>
-          <li>
-            Claude:Claude 3.5 Sonnet
-          </li>
-          <li>
-            Gemini:Gemini1.5 pro
-          </li>
-          Chatgpt,Claudeのみ継続的な会話ができる。<br>
-          画像機能は未対応<br>
-        </p>
-        <ul class="list-unstyled">
-          <li class="mb-3">
-            <strong>バグtips:</strong> 学内アカウントにもかかわらずログイン時に弾かれる際はコールドスタートの可能性があるため再度ログインを試みてください。
-          </li>
-          <li class="mb-3">
-            <strong>パフォーマンス向上:</strong> 特になし
-          </li>
-        </ul>
-      </div>
-      <div class="release-note" data-version="1.1" style="display: none;">
-        <p class="lead">
-          geminiが継続的に会話できるようにする。予定<br>
-        </p>
-        <ul class="list-unstyled">
-          <li class="mb-3">
-            <strong>新機能:</strong> Geminiが継続的に会話できるようになります。
-          </li>
-          <li class="mb-3">
-            <strong>バグ修正:</strong> なし
-          </li>
-          <li class="mb-3">
-            <strong>パフォーマンス向上:</strong> なし
-          </li>
-        </ul>
-      </div>
-      <!-- 他のバージョンのリリースノートも同様に追加 -->
-            <div class="release-note" data-version="2.0" style="display: none;">
-        <p class="lead">
-          画像機能を追加予定<br>
-        </p>
-        <ul class="list-unstyled">
-          <li class="mb-3">
-            <strong>新機能:</strong> 
-          </li>
-          <li class="mb-3">
-            <strong>バグ修正:</strong> なし
-          </li>
-          <li class="mb-3">
-            <strong>パフォーマンス向上:</strong> なし
-          </li>
-        </ul>
-      </div>
-    </div>
+
   </div>
-  
-  <div class="col-2"></div>
 </div>
 
-<script>
-  document.getElementById('version-select').addEventListener('change', function() {
-    var selectedVersion = this.value;
-    var notes = document.querySelectorAll('.release-note');
-    
-    notes.forEach(function(note) {
-      if (note.getAttribute('data-version') === selectedVersion) {
-        note.style.display = 'block';
-      } else {
-        note.style.display = 'none';
-      }
-    });
-  });
-</script>
