@@ -28,3 +28,30 @@
 .smaller-text {
   font-size: 0.9em; /* テキストを少し小さめにしてバランスを取る */
 }
+
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: #f1f1f1;
+  color: #333;
+  border: none;
+  padding: 2px 4px; /* より小さくする */
+  font-size: 10px;  /* フォントサイズを小さく */
+  cursor: pointer;
+  border-radius: 3px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+pre {
+  position: relative;
+  padding: 20px;
+  background-color: #f4f7fa; /* 背景色を少し明るくして見やすく */
+  border: 1px solid #ccc;    /* 薄いボーダーを追加 */
+  border-radius: 5px;
+  font-size: 14px; /* コードのフォントサイズを少し大きく */
+  color: #333;     /* コード文字色 */
+  overflow-x: auto; /* 横スクロールを可能にして見切れを防ぐ */
+  white-space: pre-wrap; /* コードが長いときに折り返しを適用 */
+}
