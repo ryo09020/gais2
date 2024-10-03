@@ -12,11 +12,14 @@
                 <tr>
                   <td>
                     <%= link_to conv.title, conversation_path(conv.id), class: 'text-decoration-none text-dark' %>
-                    <%= link_to "消す", conversation_path(conv.id), data: { turbo_method: :delete, turbo_confirm: "会話スレッドが全て削除されます" }, class: 'btn btn-outline-danger btn-sm float-end'%>
+                  </td>
+                  <td>
+                    <%= link_to "消す", conversation_path(conv.id), data: { turbo_method: :delete, turbo_confirm: "会話スレッド内の会話が全て削除されます" }, class: 'btn btn-outline-danger btn-sm float-end' %>
                   </td>
                 </tr>
               <% end %>
             </tbody>
+
           </table>
           <%= form_with model: new_conversation, local: true do |k| %>
             <div class="d-grid gap-2">
@@ -40,14 +43,14 @@
           <div class="col-12 col-lg-12 mb-3 col-md-12">
             <div class="form-group">
               <h6>System Prompt</h6>
-              <%= f.text_area :system, value: pre_system, class: 'form-control', style: 'min-height: 100px;' %>
+              <%= f.text_area :system, value: pre_system, class: 'form-control', style: 'min-height: 100px;' ,placeholder: 'Enter your system prompt...' %>
               <!-- Optional link for clearing conversation history -->
               <!-- <%= link_to "会話履歴消去", conversation_path(conversation.id), data: { turbo_method: :delete, turbo_confirm: "conversationとの会話履歴が全て削除されます" }, class: 'btn btn-danger mt-3'%> -->
             </div>
             <% if (6..35).include?(current_user.id) %>
               <div class="form-group mt-3">
                 <label for="api_key">APIキーを入力してください</label>
-                <%= f.text_field :api_key, value: session[:api_key], class: 'form-control' %>
+                <%= f.text_field :api_key, value: session[:api_key], class: 'form-control' ,placeholder: 'Enter your API key'%>
               </div>
             <% end %>
           </div>
@@ -55,7 +58,7 @@
           <!-- Chat History Section -->
           <div class="col-12 col-lg-12 col-md-12">
             <h6>Chat History</h6>
-            <table class="table table-hover table-sm">
+            <table class="table table-sm">
               <tbody>
                 <% chats.each do |chat| %>
                   <tr>
@@ -89,3 +92,39 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Find all code blocks
+    const codeBlocks = document.querySelectorAll('pre code');
+
+    // Iterate over each code block
+    codeBlocks.forEach(function(codeBlock) {
+      // Create a button element
+      const copyButton = document.createElement('button');
+      copyButton.innerText = 'Copy';
+      copyButton.classList.add('copy-button');
+
+      // When the button is clicked, copy the code
+      copyButton.addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent default button behavior (page reload)
+
+        const codeText = codeBlock.textContent.trim(); // Use textContent and trim
+
+        // Copy the text to the clipboard
+        navigator.clipboard.writeText(codeText).then(function() {
+          copyButton.innerText = 'Copied!';
+          setTimeout(() => copyButton.innerText = 'Copy', 2000);  // Reset button text after 2 seconds
+        }).catch(function(err) {
+          console.error('Failed to copy: ', err);
+          alert('Failed to copy!');
+        });
+      });
+
+      // Insert the button inside the pre element (right above the code block)
+      const preElement = codeBlock.parentNode;
+      preElement.style.position = 'relative'; // Make sure the pre element is relatively positioned
+      preElement.appendChild(copyButton); // Append the button to the pre element
+    });
+  });
+</script>
