@@ -94,7 +94,8 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  // 関数を定義してボタンのセットアップを行う
+  function setupCopyButtons() {
     // Find all code blocks
     const codeBlocks = document.querySelectorAll('pre code');
 
@@ -126,5 +127,15 @@
       preElement.style.position = 'relative'; // Make sure the pre element is relatively positioned
       preElement.appendChild(copyButton); // Append the button to the pre element
     });
+  }
+
+  // Turboによる部分的なリロードに対応するためにturbo:loadイベントを使う
+  document.addEventListener('turbo:load', function() {
+    setupCopyButtons(); // Turbo経由でページが部分的にリロードされた時のボタンセットアップ
+  });
+
+  // 最初のページロードでのセットアップ
+  document.addEventListener('DOMContentLoaded', function() {
+    setupCopyButtons(); // 通常のページ読み込み時のボタンセットアップ
   });
 </script>
