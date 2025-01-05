@@ -1,5 +1,4 @@
 
-markdown
 # アプリケーションのセットアップ
 
 ## 必要な環境
@@ -46,3 +45,22 @@ markdown
     2. Gemini（継続的な会話はできません）
     3. Claude
 
+- ### 画面設計
+     - [rootページ](https://gais.sb.ecei.tohoku.ac.jp/)
+       アプリのtopページとしてログインをお願いするページ
+     - aboutページ
+       <img width="1364" alt="スクリーンショット 2025-01-05 21 03 53" src="https://github.com/user-attachments/assets/d6c81fee-b448-4a07-a1f6-0177267e74bf" />
+
+       リリースノートを表示し、どのような更新が行われたかを確認できるページ
+
+  ---
+  --- ログイン後 ---
+     - usersページ
+     <img width="1363" alt="スクリーンショット 2025-01-05 21 03 00" src="https://github.com/user-attachments/assets/e54fea28-5ab8-4d0d-9c81-2ed89ca09009" />
+
+       AIモデルを選択し、スレッドを作成、遷移することができるページ
+     - conversation/idページ
+       <img width="1367" alt="スクリーンショット 2025-01-05 21 03 10" src="https://github.com/user-attachments/assets/3ecc481d-f036-4baa-9756-da2e6e63fedc" />
+
+       スレッドページで各種AIと会話をすることができるページ
+      東北大アカウントでのログイン時はAPIキーを入力するフィールドは存在しない
