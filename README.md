@@ -58,8 +58,7 @@
      - usersページ
      <img width="1363" alt="スクリーンショット 2025-01-05 21 03 00" src="https://github.com/user-attachments/assets/e54fea28-5ab8-4d0d-9c81-2ed89ca09009" />
 
-
-       AIモデルを選択し、スレッドを作成、遷移することができるページ
+   AIモデルを選択し、スレッドを作成、遷移することができるページ
      - conversation/idページ
        <img width="1367" alt="スクリーンショット 2025-01-05 21 03 10" src="https://github.com/user-attachments/assets/3ecc481d-f036-4baa-9756-da2e6e63fedc" />
 
