@@ -49,7 +49,7 @@
      - [rootページ](https://gais.sb.ecei.tohoku.ac.jp/)
        アプリのtopページとしてログインをお願いするページ
      - aboutページ
-       <img width="1364" alt="スクリーンショット 2025-01-05 21 03 53" src="https://github.com/user-attachments/assets/d6c81fee-b448-4a07-a1f6-0177267e74bf" />
+       <img width="1352" alt="スクリーンショット 2025-01-05 21 16 09" src="https://github.com/user-attachments/assets/57ae2a67-f90b-4317-ba90-9a62b5a1c51d" />
 
        リリースノートを表示し、どのような更新が行われたかを確認できるページ
 
