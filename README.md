@@ -60,7 +60,7 @@
 
    AIモデルを選択し、スレッドを作成、遷移することができるページ
      - conversation/idページ
-       <img width="1367" alt="スクリーンショット 2025-01-05 21 03 10" src="https://github.com/user-attachments/assets/3ecc481d-f036-4baa-9756-da2e6e63fedc" />
+       <img width="1369" alt="スクリーンショット 2025-01-05 21 18 13" src="https://github.com/user-attachments/assets/2fb34357-f2cc-4971-823f-e9359a5a693e" />
 
        スレッドページで各種AIと会話をすることができるページ
       東北大アカウントでのログイン時はAPIキーを入力するフィールドは存在しない
